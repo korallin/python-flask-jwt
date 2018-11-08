@@ -1,0 +1,8 @@
+# Referencia
+https://github.com/oliverSI/flask-restful-authentication
+
+# Gerador de JWT
+https://jwt.io/
+
+# Tutorial de python ldap
+http://blog.emfeld.com/2013/03/ldap-login-authentication-using-python.html
