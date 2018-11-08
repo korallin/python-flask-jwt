@@ -1,0 +1,7 @@
+flask
+pymongo
+flask-restful
+Flask-Mail
+pyjwt
+config
+python-ldap

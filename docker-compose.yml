@@ -1,0 +1,24 @@
+version: '3'
+services:
+  python-flask-teste:
+    image: python-flask-tiago-dev:v1
+    volumes:
+      - /root/python-flask-jwt:/usr/src/app
+    ports:
+      - "8080:5000"
+    depends_on:
+      - openldap-teste
+    links:
+      - openldap-teste 
+  openldap-teste:
+    image: osixia/openldap:1.2.2
+    ports:
+      - "389:389"
+      - "636:636"
+    volumes:
+      - "/root/python-flask-jwt/var/lib/ldap:/var/lib/ldap"
+      - "/root/python-flask-jwt/etc/ldap/slapd.d:/etc/ldap/slapd.d"
+    environment:
+      - LDAP_ORGANISATION:'Tiago'
+      - LDAP_DOMAIN='tiago.local'
+      - LDAP_ADMIN_PASSWORD='master'
