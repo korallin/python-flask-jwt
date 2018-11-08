@@ -2,15 +2,20 @@ import re
 import datetime
 import functools
 import jwt
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Resource, Api, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 import config
+
+from acessoLDAP import AcessoLDAP
 
 app = Flask(__name__)
 
 app.config.from_object('config')
 api = Api(app)
+
+ldap = AcessoLDAP(app.config['SERV_LDAP'],app.config['PORT_LDAP'],app.config['BASE_DN_LDAP'],app.config['USER_DN_LDAP'],app.config['PASS_LDAP'])
+
 
 def auth_required(method):
    @functools.wraps(method)
@@ -28,16 +33,17 @@ def auth_required(method):
    return wrapper
 
 class Pessoa(Resource):
-   @auth_required
-   def get(self):
-      return "Funcionou!"
+#   @auth_required
+   def get(self,uid):
+      res = ldap.get_pessoa_by_uid(uid)
+      return jsonify(res)
 
 class Senha(Resource):
    @auth_required
    def get(self):
       return "Funcionou a senha!"
 
-api.add_resource(Pessoa, '/v1/pessoa')
+api.add_resource(Pessoa, '/v1/pessoa', '/v1/pessoa/<uid>')
 api.add_resource(Senha, '/v1/senha')
 
 if __name__ == '__main__':
