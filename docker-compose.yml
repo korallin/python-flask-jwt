@@ -1,7 +1,7 @@
 version: '3'
 services:
   python-flask-teste:
-    image: python-flask-tiago-dev:v1
+    image: python2-flask-tiago-dev:v2
     volumes:
 #      - /root/python-flask-jwt:/usr/src/app
       - "./:/usr/src/app"
@@ -10,7 +10,7 @@ services:
     depends_on:
       - openldap-teste
     links:
-      - openldap-teste 
+      - openldap-teste
   openldap-teste:
     image: osixia/openldap:1.2.2
     ports:

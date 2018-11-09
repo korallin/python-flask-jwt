@@ -25,7 +25,7 @@ def auth_required(method):
          if header is None:
             abort(400, message='Empty or null authorization header.')
          decoded = jwt.decode(str(header), app.config['KEY'], algorithms='HS256')
-      except jwt.DecodeError as e: 
+      except jwt.DecodeError as e:
          abort(400, message=str(e))
       except jwt.ExpiredSignatureError as e:
          abort(400, message=str(e))
@@ -47,4 +47,4 @@ api.add_resource(Pessoa, '/v1/pessoa', '/v1/pessoa/<uid>')
 api.add_resource(Senha, '/v1/senha')
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0',port=5000,debug=True)
+   app.run(host='0.0.0.0',port=5000,debug=app.config['DEBUG'])
