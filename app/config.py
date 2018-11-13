@@ -9,4 +9,4 @@ SERV_LDAP = "ldap://poolldap.trt15.jus.br"
 PORT_LDAP = 389
 BASE_DN_LDAP = "o=trt15"
 USER_DN_LDAP = "uid=tiagosleal,ou=ssbi,ou=citic,ou=setic,ou=adm,o=trt15"
-PASS_LDAP = "N4ru70N4!"
+PASS_LDAP = ""
